@@ -15,13 +15,17 @@ public class LoginPage extends JFrame{
     
     LoginPage(){
         setUp();
+        JPanel header = new JPanel();
+        JLabel title = new JLabel("WELCOME TO BCA CENTRE");
+        
+
         JPanel center = new JPanel();
         center.setLayout(new GridLayout(2,2));
         //Name 
         JLabel nameL=new JLabel("NAME : ");
         nameI=new JTextField();
 
-        //Name 
+        //Password
         JLabel passwordL=new JLabel("PASSWORD : ");
         passwordI=new JTextField();
         
