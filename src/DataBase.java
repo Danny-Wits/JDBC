@@ -241,8 +241,8 @@ public class DataBase {
 
     /**
      * This function convert a resultset instance created by jdbc to a Java list object.
-     * @param resultSet
-     * @return A List<List<String>> 
+     * @param resultSet Result set is returned by JDBC queries
+     * @return A List(List(String)) 
      */
     public static List<List<String>> resultSetToList(ResultSet resultSet) {
         List<List<String>> result = new ArrayList<>();
