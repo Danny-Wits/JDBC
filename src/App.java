@@ -6,5 +6,6 @@ public class App {
         Connection connection = DataBase.setConnection();
         DataBase.getDetails(connection);
         connection.close();
+        new Login();
     }
 }
