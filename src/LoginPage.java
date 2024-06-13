@@ -79,6 +79,8 @@ public class LoginPage extends JFrame implements ActionListener {
                 message("password no no ");
             }
         } else {
+            //todo add user.
+            System.out.println("creating user");
 
         }
         // TODO ADD - name passHash
