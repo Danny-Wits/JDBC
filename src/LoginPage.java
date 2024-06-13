@@ -76,7 +76,7 @@ public class LoginPage extends JFrame implements ActionListener {
         var list = DataBase.run(connection, query, r);
         if (list.size() == 1) {
             String hasPass = Integer.toString(stringEnc(password));
-            if (list.get(2).equals(hasPass)) {
+            if (list.get(0).get(2).equals(password)) {
               message("password match");
               }else{
                 message("password no no ");
