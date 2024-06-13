@@ -5,5 +5,6 @@ public class App {
        // DataBase.getDetails(connection);
         //connection.close();
         new Login();
+        System.err.println(".");
     }
 }
