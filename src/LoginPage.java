@@ -80,6 +80,9 @@ public class LoginPage extends JFrame implements ActionListener {
             }
         } else {
             //todo new
+            //todo add user.
+            System.out.println("creating user");
+
         }
         // TODO ADD - name passHash
 
