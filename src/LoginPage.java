@@ -1,41 +1,89 @@
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 
-public class LoginPage extends JFrame{
-    private JTextField nameI,passwordI;
-    private void setUp(){
-       setTitle("LoginPage");
-       setBounds(100,100,500,700);
-       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+
+public class LoginPage extends JFrame implements ActionListener {
+    private JTextField nameI, passwordI;
+
+    private void setUp() {
+        setTitle("LoginPage");
+        setBounds(100, 100, 500, 700);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
-    LoginPage(){
+
+    LoginPage() {
         setUp();
         JPanel header = new JPanel();
         JLabel title = new JLabel("WELCOME TO BCA CENTRE");
-        
+        title.setFont(new Font("DIGIFACE", 0, 40));
+        header.add(title);
+        add(header, BorderLayout.NORTH);
 
         JPanel center = new JPanel();
-        center.setLayout(new GridLayout(2,2));
-        //Name 
-        JLabel nameL=new JLabel("NAME : ");
-        nameI=new JTextField();
+        center.setLayout(null);
+        // Name
+        JLabel nameL = new JLabel("NAME : ");
+        nameL.setBounds(10,50,400,100);
+        nameI = new JTextField();
+        nameI.setBounds(10,150,400,50);
+        // Password
+        JLabel passwordL = new JLabel("PASSWORD : ");
+        passwordL.setBounds(10,250,400,100);
+        passwordI = new JTextField();
+        passwordI.setBounds(10,350,400,50);
 
-        //Password
-        JLabel passwordL=new JLabel("PASSWORD : ");
-        passwordI=new JTextField();
-        
+        // SUBMIT
+
+        JButton submit = new JButton("LOGIN?SIGNUP");
+        submit.setFont(new Font("DIGIFACE", 0, 32));
+        submit.setBounds(50,450,300,100);
+        submit.addActionListener(this);
+
         center.add(nameL);
         center.add(nameI);
         center.add(passwordL);
         center.add(passwordI);
-        
-        add(center,BorderLayout.CENTER);
+        center.add(submit);
+        add(center, BorderLayout.CENTER);
+    
         setVisible(true);
     }
-    
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String name = nameI.getText();
+        String password = passwordI.getText();
+
+        // data base connection
+        Connection connection = DataBase.setConnection();
+
+        // TODO Double check
+        ResultSet r = null;
+        String query = String.format("SELECT * FROM login_detail WHERE name='%s'", name);
+        var list = DataBase.run(connection, query, r);
+       if (list.size()==1) {
+            System.out.println("found");
+           // query = String.format("SELECT * FROM login_detail WHERE password='%s'", md5.);
+
+       }else{
+        System.out.println("not found");
+       }
+        // TODO ADD - name passHash
+
+        // TODO password hash
+        // Todo password match
+
+        // TODo login in
+    }
+
 }
