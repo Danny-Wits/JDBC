@@ -79,7 +79,7 @@ public class LoginPage extends JFrame implements ActionListener {
                 message("password no no ");
             }
         } else {
-
+            //todo new
         }
         // TODO ADD - name passHash
 
