@@ -1,6 +1,7 @@
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -9,6 +10,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -33,20 +36,20 @@ public class LoginPage extends JFrame implements ActionListener {
         center.setLayout(null);
         // Name
         JLabel nameL = new JLabel("NAME : ");
-        nameL.setBounds(10,50,400,100);
+        nameL.setBounds(10, 50, 400, 100);
         nameI = new JTextField();
-        nameI.setBounds(10,150,400,50);
+        nameI.setBounds(10, 150, 400, 50);
         // Password
         JLabel passwordL = new JLabel("PASSWORD : ");
-        passwordL.setBounds(10,250,400,100);
+        passwordL.setBounds(10, 250, 400, 100);
         passwordI = new JTextField();
-        passwordI.setBounds(10,350,400,50);
+        passwordI.setBounds(10, 350, 400, 50);
 
         // SUBMIT
 
         JButton submit = new JButton("LOGIN?SIGNUP");
         submit.setFont(new Font("DIGIFACE", 0, 32));
-        submit.setBounds(50,450,300,100);
+        submit.setBounds(50, 450, 300, 100);
         submit.addActionListener(this);
 
         center.add(nameL);
@@ -55,7 +58,7 @@ public class LoginPage extends JFrame implements ActionListener {
         center.add(passwordI);
         center.add(submit);
         add(center, BorderLayout.CENTER);
-    
+
         setVisible(true);
     }
 
@@ -71,19 +74,27 @@ public class LoginPage extends JFrame implements ActionListener {
         ResultSet r = null;
         String query = String.format("SELECT * FROM login_detail WHERE name='%s'", name);
         var list = DataBase.run(connection, query, r);
-       if (list.size()==1) {
-            System.out.println("found");
-           // query = String.format("SELECT * FROM login_detail WHERE password='%s'", md5.);
+        if (list.size() == 1) {
+            String hasPass = Integer.toString(stringEnc(password));
+            if (list.get(2).equals(hasPass)) {
+              message("password match");
+              }else{
+                message("password no no ");
+            }
+        } else {
 
-       }else{
-        System.out.println("not found");
-       }
+        }
         // TODO ADD - name passHash
 
-        // TODO password hash
-        // Todo password match
-
+       
         // TODo login in
     }
 
+    private int stringEnc(String input) {
+        return input.hashCode();
+    }
+    
+    private void message(String msg){
+        JOptionPane.showMessageDialog(this,msg);
+    }
 }

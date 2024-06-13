@@ -194,6 +194,7 @@ public class DataBase {
      * @return The method `run` returns a `List` of `List` of `String` containing
      *         the results of the query
      *         executed on the database.
+     * @Danny-Wits
      */
     public static List<List<String>> run(Connection connection, String query, ResultSet resultSet) {
         List<List<String>> result = null;
